@@ -16,3 +16,14 @@ public class LoginTest {
         Login login = new Login("Kyle", "Daniels", "kyle!!!!!!!", "Ch&&sec@ke99!", "+27838968976");
         assertFalse(login.checkUserName("kyle!!!!!!!"));
     }
+    @Test
+    public void testPasswordMeetsComplexity() {
+        Login login = new Login("Kyle", "Daniels", "kyl_1", "Ch&&sec@ke99!", "+27838968976");
+        assertTrue(login.checkPasswordComplexity("Ch&&sec@ke99!"));
+    }
+
+    @Test
+    public void testPasswordDoesNotMeetComplexity() {
+        Login login = new Login("Kyle", "Daniels", "kyl_1", "password", "+27838968976");
+        assertFalse(login.checkPasswordComplexity("password"));
+    }
