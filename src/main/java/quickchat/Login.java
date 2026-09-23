@@ -25,4 +25,29 @@ public class Login {
         return username.contains("_") && username.length() <= 5;
     }
 
+    /**
+     *checks whether the passowrds have the required things .
+     */
+    public boolean checkPasswordComplexity(String password) {
+        boolean hasCapitalLetter = false;
+        boolean hasNumber = false;
+        boolean hasSpecialCharacter = false;
+
+        for (int i = 0; i < password.length(); i++) {
+            char currentChar = password.charAt(i);
+
+            if (Character.isUpperCase(currentChar)) {
+                hasCapitalLetter = true;
+            }
+            if (Character.isDigit(currentChar)) {
+                hasNumber = true;
+            }
+            if (!Character.isLetterOrDigit(currentChar)) {
+                hasSpecialCharacter = true;
+            }
+        }
+
+        return password.length() >= 8 && hasCapitalLetter && hasNumber && hasSpecialCharacter;
+    }
+
     
