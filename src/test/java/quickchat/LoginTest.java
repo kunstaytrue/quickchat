@@ -49,3 +49,17 @@ public class LoginTest {
         Login login = new Login("Kyle", "Daniels", "kyl_1", "Ch&&sec@ke99!", "+27838968976");
         assertFalse(login.loginUser("kyl_1", "wrongPassword"));
     }
+     @Test
+    public void testRegisterUserSuccessMessage() {
+        Login login = new Login("Kyle", "Daniels", "kyl_1", "Ch&&sec@ke99!", "+27838968976");
+        String expected = "Username successfully captured. Password successfully captured. Cell phone number successfully added.";
+        assertEquals(expected, login.registerUser());
+    }
+
+    @Test
+    public void testRegisterUserUsernameFailMessage() {
+        Login login = new Login("Kyle", "Daniels", "kyle!!!!!!!", "Ch&&sec@ke99!", "+27838968976");
+        String expected = "Username is not correctly formatted; please ensure that your username contains an underscore and is no more than five characters in length.";
+        assertEquals(expected, login.registerUser());
+    }
+}
