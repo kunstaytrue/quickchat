@@ -61,5 +61,19 @@ public class Login {
         String regex = "^\\+27\\d{1,10}$";
         return Pattern.matches(regex, cellphone);
     }
-
-    
+/**
+     * checks whether the 3 previous inputs are valid
+  
+     */
+    public String registerUser() {
+        if (!checkUserName(username)) {
+            return "Username is not correctly formatted; please ensure that your username contains an underscore and is no more than five characters in length.";
+        }
+        if (!checkPasswordComplexity(password)) {
+            return "Password is not correctly formatted; please ensure that the password contains at least eight characters, a capital letter, a number, and a special character.";
+        }
+        if (!checkCellPhoneNumber(cellphone)) {
+            return "Cell phone number incorrectly formatted or does not contain international code.";
+        }
+        return "Username successfully captured. Password successfully captured. Cell phone number successfully added.";
+    }
