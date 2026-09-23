@@ -38,3 +38,14 @@ public class LoginTest {
         Login login = new Login("Kyle", "Daniels", "kyl_1", "Ch&&sec@ke99!", "08966553");
         assertFalse(login.checkCellPhoneNumber("08966553"));
     }
+    @Test
+    public void testLoginSuccessful() {
+        Login login = new Login("Kyle", "Daniels", "kyl_1", "Ch&&sec@ke99!", "+27838968976");
+        assertTrue(login.loginUser("kyl_1", "Ch&&sec@ke99!"));
+    }
+
+    @Test
+    public void testLoginFailed() {
+        Login login = new Login("Kyle", "Daniels", "kyl_1", "Ch&&sec@ke99!", "+27838968976");
+        assertFalse(login.loginUser("kyl_1", "wrongPassword"));
+    }
