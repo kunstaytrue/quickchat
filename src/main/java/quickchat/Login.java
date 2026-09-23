@@ -77,3 +77,21 @@ public class Login {
         }
         return "Username successfully captured. Password successfully captured. Cell phone number successfully added.";
     }
+    /**
+     * Checks whether the entered username and password match the ones
+     * captured at registration.
+     */
+    public boolean loginUser(String enteredUsername, String enteredPassword) {
+        return enteredUsername.equals(username) && enteredPassword.equals(password);
+    }
+
+    /**
+     * Returns the  message for a login attempt.
+     */
+    public String returnLoginStatus(boolean loginSuccess) {
+        if (loginSuccess) {
+            return "Welcome " + firstName + ", " + lastName + " it is great to see you again.";
+        }
+        return "Username or password incorrect, please try again.";
+    }
+}
