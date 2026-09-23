@@ -50,4 +50,16 @@ public class Login {
         return password.length() >= 8 && hasCapitalLetter && hasNumber && hasSpecialCharacter;
     }
 
+    /**
+     *checks the input of cell number it has to start with (+27)
+     * Reference: regular expression syntax adapted from the Java Pattern
+     * class documentation, Oracle (n.d.) Pattern (Java SE 17 & JDK 17).
+     * Available at: https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/regex/Pattern.html
+     * (Accessed: 19 September 2026).
+     */
+    public boolean checkCellPhoneNumber(String cellphone) {
+        String regex = "^\\+27\\d{1,10}$";
+        return Pattern.matches(regex, cellphone);
+    }
+
     
