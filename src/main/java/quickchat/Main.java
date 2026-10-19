@@ -85,4 +85,39 @@ public class Main {
             }
         }
     }
+/**
+* Shows the welcome message and the main menu until the user chooses to quit.
+     */
+    private static void runQuickChat(Scanner scanner) {
+        System.out.println("\nWelcome to QuickChat.");
 
+        int numberOfMessages = readPositiveNumber(scanner, "How many messages do you wish to enter? ");
+        boolean messagesEntered = false;
+        boolean running = true;
+
+        while (running) {
+            System.out.println("\nPlease choose an option:");
+            System.out.println("1) Send Messages");
+            System.out.println("2) Show recently sent messages");
+            System.out.println("3) Quit");
+            String choice = scanner.nextLine();
+
+            if (choice.equals("1")) {
+                if (messagesEntered) {
+                    System.out.println("You have already entered the number of messages you set at the start.");
+                } else {
+                    sendMessages(scanner, numberOfMessages);
+                    messagesEntered = true;
+                }
+            } else if (choice.equals("2")) {
+                System.out.println("Coming Soon.");
+            } else if (choice.equals("3")) {
+                System.out.println("Goodbye.");
+                running = false;
+            } else {
+                System.out.println("Invalid option, please enter 1, 2 or 3.");
+            }
+        }
+    }
+
+ 
