@@ -30,3 +30,14 @@ public class MessageTest {
                 Message.checkMessageLength(longMessage));
     }
     
+    @Test
+    public void testRecipientCorrectlyFormatted() {
+        assertEquals("Cell phone number successfully captured.",
+                Message.checkRecipientCell(RECIPIENT_1));
+    }
+
+    @Test
+    public void testRecipientIncorrectlyFormatted() {
+        assertEquals("Cell phone number is incorrectly formatted or does not contain an international code. Please correct the number and try again.",
+                Message.checkRecipientCell(RECIPIENT_2));
+    }
