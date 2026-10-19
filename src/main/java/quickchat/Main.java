@@ -120,4 +120,103 @@ public class Main {
         }
     }
 
- 
+ /**
+     * lets the user enter the set number of messages, one loop per message.
+     */
+    private static void sendMessages(Scanner scanner, int numberOfMessages) {
+        for (int i = 0; i < numberOfMessages; i++) {
+            System.out.println("\n--- Message " + (i + 1) + " of " + numberOfMessages + " ---");
+
+            String recipient = askForRecipient(scanner);
+            String messageText = askForMessageText(scanner);
+
+            // The loop counter (i) is used as the message number
+            Message message = new Message(i, recipient, messageText);
+            System.out.println(message.describeMessageID());
+
+            int choice = askForSendOption(scanner);
+            System.out.println(message.sentMessage(choice));
+
+            if (choice == 1) {
+                System.out.println("\n" + message.getMessageDetails());
+            } else if (choice == 2) {
+                String input = "";
+                while (!input.equals("0")) {
+                    input = scanner.nextLine();
+                }
+                System.out.println("Message deleted.");
+            }
+        }
+
+        System.out.println("\n=== Messages sent ===");
+        System.out.println(Message.printMessages());
+        System.out.println("Total messages sent: " + Message.returnTotalMessages());
+    }
+
+    /**
+     * Keeps asking until a valid whole number above zero is entered.
+     */
+    private static int readPositiveNumber(Scanner scanner, String prompt) {
+        int number = 0;
+        while (number < 1) {
+            System.out.print(prompt);
+            try {
+                number = Integer.parseInt(scanner.nextLine().trim());
+            } catch (NumberFormatException e) {
+                number = 0;
+            }
+            if (number < 1) {
+                System.out.println("Please enter a whole number of 1 or more.");
+            }
+        }
+        return number;
+    }
+
+    /**
+     */
+    private static String askForRecipient(Scanner scanner) {
+        String recipient = "";
+        boolean valid = false;
+        while (!valid) {
+            System.out.print("Enter the recipient's cell phone number (e.g. +27718693002): ");
+            recipient = scanner.nextLine().trim();
+            System.out.println(Message.checkRecipientCell(recipient));
+            valid = Message.isRecipientValid(recipient);
+        }
+        return recipient;
+    }
+
+    /**
+     */
+    private static String askForMessageText(Scanner scanner) {
+        String messageText = "";
+        boolean valid = false;
+        while (!valid) {
+            System.out.print("Enter your message (max 250 characters): ");
+            messageText = scanner.nextLine();
+            System.out.println(Message.checkMessageLength(messageText));
+            valid = Message.isMessageLengthValid(messageText) && !messageText.trim().isEmpty();
+        }
+        return messageText;
+    }
+
+    /**
+     * Asks whether to send, disregard or store the message.
+     */
+    private static int askForSendOption(Scanner scanner) {
+        int choice = 0;
+        while (choice < 1 || choice > 3) {
+            System.out.println("What would you like to do with this message?");
+            System.out.println("1) Send Message");
+            System.out.println("2) Disregard Message");
+            System.out.println("3) Store Message to send later");
+            try {
+                choice = Integer.parseInt(scanner.nextLine().trim());
+            } catch (NumberFormatException e) {
+                choice = 0;
+            }
+        }
+        return choice;
+    }
+}
+
