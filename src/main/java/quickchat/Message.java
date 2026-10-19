@@ -89,3 +89,51 @@ public class Message {
         if (isRecipientValid(recipient)) {
             return "Cell phone number successfurmatted or does not contain an international code. Please correct the number and try again.";
     }
+/**
+     */
+    public static boolean isMessageLengthValid(String messageText) {
+        return messageText.length() <= MAX_MESSAGE_LENGTH;
+    }
+
+    /**
+     */
+    public static String checkMessageLength(String messageText) {
+        if (isMessageLengthValid(messageText)) {
+            return "Message ready to send.";
+        }
+        int excess = messageText.length() - MAX_MESSAGE_LENGTH;
+        return "Message exceeds 250 characters by " + excess + "; please reduce the size.";
+    }
+
+    /**
+     * creates hagh
+     */
+    public String createMessageHash() {
+        String[] words = messageText.trim().split("\\s+");
+        String firstWord = removeSymbols(words[0]);
+        String lastWord = removeSymbols(words[words.length - 1]);
+        String firstTwoDigits = messageID.substring(0, 2);
+        return (firstTwoDigits + ":" + messageNumber + ":" + firstWord + lastWord).toUpperCase();
+    }
+
+    /**
+     */
+    private String removeSymbols(String word) {
+        return word.replaceAll("[^A-Za-z0-9]", "");
+    }
+
+    /**
+     */
+    public String sentMessage(int choice) {
+        if (choice == 1) {
+            sentMessages.add(this);
+            return "Message successfully sent.";
+        } else if (choice == 2) {
+            return "Press 0 to delete the message.";
+        } else if (choice == 3) {
+            storeMessage();
+            return "Message successfully stored.";
+        }
+        return "Invalid option, please choose 1, 2 or 3.";
+    }
+
