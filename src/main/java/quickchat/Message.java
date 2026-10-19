@@ -30,4 +30,21 @@ public class Message {
     private String messageText;
     private String messageHash;
 
+/**
+     * Creates a message with a newly generated random ten digit ID.
+     */
+    public Message(int messageNumber, String recipient, String messageText) {
+        this(generateMessageID(messageNumber), messageNumber, recipient, messageText);
+    }
+
+    /**
+     * Creates a message with a given ID 
+     */
+    public Message(String messageID, int messageNumber, String recipient, String messageText) {
+        this.messageID = messageID;
+        this.messageNumber = messageNumber;
+        this.recipient = recipient;
+        this.messageText = messageText;
+        this.messageHash = createMessageHash();
+    }
 
