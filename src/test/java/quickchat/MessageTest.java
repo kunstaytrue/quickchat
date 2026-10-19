@@ -85,3 +85,29 @@ public class MessageTest {
         Message message = new Message(1, RECIPIENT_2, MESSAGE_2);
         assertEquals("Press 0 to delete the message.", message.sentMessage(2));
     }
+    
+@Test
+    public void testStoreMessage() {
+        Message message = new Message(1, RECIPIENT_2, MESSAGE_2);
+        assertEquals("Message successfully stored.", message.sentMessage(3));
+    }
+
+    @Test
+    public void testTotalMessagesSent() {
+        Message first = new Message(0, RECIPIENT_1, MESSAGE_1);
+        Message second = new Message(1, RECIPIENT_2, MESSAGE_2);
+
+        first.sentMessage(1);   // sent
+        second.sentMessage(2);  // disregarded, so not counted
+
+        assertEquals(1, Message.returnTotalMessages());
+    }
+
+    @Test
+    public void testPrintMessagesShowsSentMessage() {
+        Message message = new Message("0012345678", 0, RECIPIENT_1, MESSAGE_1);
+        message.sentMessage(1);
+        assertTrue(Message.printMessages().contains("00:0:HITONIGHT"));
+    }
+}
+
