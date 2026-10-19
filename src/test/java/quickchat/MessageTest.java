@@ -41,3 +41,21 @@ public class MessageTest {
         assertEquals("Cell phone number is incorrectly formatted or does not contain an international code. Please correct the number and try again.",
                 Message.checkRecipientCell(RECIPIENT_2));
     }
+    
+@Test
+    public void testMessageHashForTestCase1() {
+        Message message = new Message("0012345678", 0, RECIPIENT_1, MESSAGE_1);
+        assertEquals("00:0:HITONIGHT", message.createMessageHash());
+    }
+
+    @Test
+    public void testMessageHashesInALoop() {
+        String[] recipients = {RECIPIENT_1, RECIPIENT_2};
+        String[] messages = {MESSAGE_1, MESSAGE_2};
+        String[] expectedHashes = {"00:0:HITONIGHT", "00:1:HIPAYMENT"};
+
+        for (int i = 0; i < messages.length; i++) {
+            Message message = new Message("0098765432", i, recipients[i], messages[i]);
+            assertEquals(expectedHashes[i], message.createMessageHash());
+        }
+    }
