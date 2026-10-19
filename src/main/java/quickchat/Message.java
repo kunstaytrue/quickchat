@@ -137,3 +137,76 @@ public class Message {
         return "Invalid option, please choose 1, 2 or 3.";
     }
 
+/**
+     * Stores this message in the json file.
+     *
+     * Reference: the Gson library is used to turn the stored messages into
+     * JSON. Google (n.d.) Gson user guide. Available at:
+     * https://github.com/google/gson/blob/main/UserGuide.md
+     * (Accessed: 19 October 2026).
+     */
+    public void storeMessage() {
+        storedMessages.add(this);
+
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        File file = new File(storageFile);
+        if (file.getParentFile() != null) {
+            file.getParentFile().mkdirs();
+        }
+
+        try (FileWriter writer = new FileWriter(file)) {
+            gson.toJson(storedMessages, writer);
+        } catch (IOException e) {
+            System.out.println("Could not write to the JSON file: " + e.getMessage());
+        }
+    }
+
+    /**
+     */
+    public String getMessageDetails() {
+        return "Message ID: " + messageID + "\n"
+                + "Message Hash: " + messageHash + "\n"
+                + "Recipient: " + recipient + "\n"
+                + "Message: " + messageText;
+    }
+
+    /**
+     * brings back the details of every message sent while the program is running.
+     */
+    public static String printMessages() {
+        String allMessages = "";
+        for (int i = 0; i < sentMessages.size(); i++) {
+            allMessages += sentMessages.get(i).getMessageDetails() + "\n\n";
+        }
+        return allMessages;
+    }
+
+    /**
+     * brings back  the total number of messages sent.
+     */
+    public static int returnTotalMessages() {
+        return sentMessages.size();
+    }
+
+    /**
+     * empties out the sent and stored lists 
+     */
+    public static void clearMessages() {
+        sentMessages.clear();
+        storedMessages.clear();
+    }
+
+    /**
+     */
+    public static void setStorageFile(String fileName) {
+        storageFile = fileName;
+    }
+
+    public String getMessageID() {
+        return messageID;
+    }
+
+    public String getMessageHash() {
+        return messageHash;
+    }
+}
