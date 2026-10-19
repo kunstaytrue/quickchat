@@ -47,4 +47,45 @@ public class Message {
         this.messageText = messageText;
         this.messageHash = createMessageHash();
     }
+    lly captured.";
+        }
+        return "Cell phone number is incorrectly fo/**
+     * Builds a ten digit ID using string manipulation and the loop counter.
+     * A random number is padded to 19 digits, substring takes nine random
+     * digits from the end, and the last digit comes from the message number
+     * (the loop counter), so the ID is always exactly ten digits.
+     */
+    private static String generateMessageID(int messageNumber) {
+        Random random = new Random();
+        long randomNumber = Math.abs(random.nextLong() % Long.MAX_VALUE);
+        String digits = String.format("%019d", randomNumber);
+        String randomPart = digits.substring(digits.length() - 9);
+        String counterPart = String.valueOf(messageNumber % 10);
+        return randomPart + counterPart;
+    }
 
+    /**
+     */
+    public boolean checkMessageID() {
+        return messageID.length() <= 10;
+    }
+
+    /**
+     * Returns the message used when an ID has been generated.
+     */
+    public String describeMessageID() {
+        return "Message ID generated: " + messageID;
+    }
+
+    /**
+     */
+    public static boolean isRecipientValid(String recipient) {
+        return Pattern.matches("^\\+27\\d{1,10}$", recipient);
+    }
+
+    /**
+     */
+    public static String checkRecipientCell(String recipient) {
+        if (isRecipientValid(recipient)) {
+            return "Cell phone number successfurmatted or does not contain an international code. Please correct the number and try again.";
+    }
