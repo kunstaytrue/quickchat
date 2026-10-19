@@ -47,9 +47,7 @@ public class Message {
         this.messageText = messageText;
         this.messageHash = createMessageHash();
     }
-    lly captured.";
-        }
-        return "Cell phone number is incorrectly fo/**
+/**
      * Builds a ten digit ID using string manipulation and the loop counter.
      * A random number is padded to 19 digits, substring takes nine random
      * digits from the end, and the last digit comes from the message number
@@ -85,9 +83,11 @@ public class Message {
 
     /**
      */
-    public static String checkRecipientCell(String recipient) {
+        public static String checkRecipientCell(String recipient) {
         if (isRecipientValid(recipient)) {
-            return "Cell phone number successfurmatted or does not contain an international code. Please correct the number and try again.";
+            return "Cell phone number successfully captured.";
+        }
+        return "Cell phone number is incorrectly formatted or does not contain an international code. Please correct the number and try again.";
     }
 /**
      */
