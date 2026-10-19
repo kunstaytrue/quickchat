@@ -59,3 +59,17 @@ public class MessageTest {
             assertEquals(expectedHashes[i], message.createMessageHash());
         }
     }
+    
+@Test
+    public void testMessageIDCreated() {
+        Message message = new Message(0, RECIPIENT_1, MESSAGE_1);
+        assertTrue(message.checkMessageID());
+        assertEquals(10, message.getMessageID().length());
+        assertTrue(message.getMessageID().matches("\\d{10}"));
+        assertTrue(message.getMessageID().endsWith("0"));
+
+        Message secondMessage = new Message(1, RECIPIENT_2, MESSAGE_2);
+        assertEquals(10, secondMessage.getMessageID().length());
+        assertTrue(secondMessage.getMessageID().endsWith("1"));
+        assertEquals("Message ID generated: " + message.getMessageID(), message.describeMessageID());
+    }
