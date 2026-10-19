@@ -73,3 +73,15 @@ public class MessageTest {
         assertTrue(secondMessage.getMessageID().endsWith("1"));
         assertEquals("Message ID generated: " + message.getMessageID(), message.describeMessageID());
     }
+    
+@Test
+    public void testSendMessage() {
+        Message message = new Message(0, RECIPIENT_1, MESSAGE_1);
+        assertEquals("Message successfully sent.", message.sentMessage(1));
+    }
+
+    @Test
+    public void testDisregardMessage() {
+        Message message = new Message(1, RECIPIENT_2, MESSAGE_2);
+        assertEquals("Press 0 to delete the message.", message.sentMessage(2));
+    }
